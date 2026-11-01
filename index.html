@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClassMode — Teacher Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell" id="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar" aria-label="Main Navigation">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">ClassMode</span>
+            <span class="brand-tag">Teacher Portal</span>
+          </div>
+        </div>
+        <button class="mobile-close-btn" id="mobile-sidebar-close" aria-label="Close navigation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="demo-mode-pill">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Demo Mode Simulator</span>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-view="overview" id="nav-overview">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="9" x="3" y="3" rx="1"/>
+            <rect width="7" height="5" x="14" y="3" rx="1"/>
+            <rect width="7" height="9" x="14" y="12" rx="1"/>
+            <rect width="7" height="5" x="3" y="16" rx="1"/>
+          </svg>
+          <span>Overview</span>
+        </button>
+
+        <button class="nav-item" data-view="live" id="nav-live">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="2"/>
+            <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/>
+          </svg>
+          <span>Live Session</span>
+          <span class="badge-live" id="live-session-badge">Active</span>
+        </button>
+
+        <button class="nav-item" data-view="schedule" id="nav-schedule">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+            <line x1="16" x2="16" y1="2" y2="6"/>
+            <line x1="8" x2="8" y1="2" y2="6"/>
+            <line x1="3" x2="21" y1="10" y2="10"/>
+          </svg>
+          <span>Schedule</span>
+        </button>
+
+        <button class="nav-item" data-view="devices" id="nav-devices">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+            <line x1="12" x2="12.01" y1="18" y2="18"/>
+          </svg>
+          <span>Devices</span>
+          <span class="badge-count" id="device-total-count">28</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar" aria-hidden="true">EV</div>
+          <div class="user-info">
+            <span class="user-name">Ms. Elena Vance</span>
+            <span class="user-role">Science Dept • Room 204</span>
+          </div>
+        </div>
+        <div class="privacy-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <span>Privacy Guaranteed: No message, browser, or personal app data is accessible.</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <!-- Top Navigation Header -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open navigation menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" x2="20" y1="12" y2="12"/>
+              <line x1="4" x2="20" y1="6" y2="6"/>
+              <line x1="4" x2="20" y1="18" y2="18"/>
+            </svg>
+          </button>
+          <div class="page-title-block">
+            <h1 class="page-title" id="page-title">Overview</h1>
+            <p class="page-subtitle" id="page-subtitle">Period 3 • AP Biology • Fall 2026</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Demo State Controller Bar -->
+          <div class="demo-controls-wrapper" title="Prototype controls for previewing application states">
+            <span class="demo-tag">Prototype Controls:</span>
+            <button class="btn-subtle" id="toggle-session-state-btn">Toggle Active/Upcoming</button>
+            <button class="btn-subtle" id="toggle-loading-state-btn">Simulate Loading</button>
+            <button class="btn-subtle" id="toggle-error-state-btn">Simulate Sync Error</button>
+            <button class="btn-subtle" id="reset-demo-data-btn">Reset Data</button>
+          </div>
+
+          <div class="session-quick-action" id="topbar-session-action">
+            <!-- Rendered dynamically (Start Session or End Session) -->
+          </div>
+        </div>
+      </header>
+
+      <!-- Global Notification Banners -->
+      <div id="error-banner-container" class="error-banner-container" hidden>
+        <div class="error-banner" role="alert">
+          <div class="error-banner-content">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <div>
+              <strong>Simulated Sync Failure:</strong> School MDM Gateway is temporarily unreachable. Actions will queue locally.
+            </div>
+          </div>
+          <button class="btn-sm btn-outline-white" id="dismiss-error-banner-btn">Dismiss</button>
+        </div>
+      </div>
+
+      <!-- Main Body Container -->
+      <main class="content-body" id="content-body">
+        
+        <!-- ==================== SCREEN 1: OVERVIEW ==================== -->
+        <section class="view-panel active" id="view-overview" aria-labelledby="overview-heading">
+          <h2 id="overview-heading" class="sr-only">Classroom Overview</h2>
+
+          <!-- Today's Session Hero Card -->
+          <div class="hero-card" id="overview-hero-card">
+            <div class="hero-card-left">
+              <div class="hero-status-row">
+                <span class="status-pill status-pill-active" id="hero-status-pill">
+                  <span class="pulse-dot"></span>
+                  <span id="hero-status-text">Active Session</span>
+                </span>
+                <span class="pill-room">Room 204 • Lab B</span>
+                <span class="pill-demo">Demo Mode MDM</span>
+              </div>
+              <h3 class="hero-class-title" id="hero-class-title">Grade 10 — AP Biology</h3>
+              <p class="hero-desc" id="hero-class-desc">Unit 4: Cellular Respiration Lab & Quiz • Scheduled 09:30 AM – 10:45 AM (75 mins)</p>
+
+              <!-- Progress Bar -->
+              <div class="session-progress-wrapper" id="hero-progress-wrapper">
+                <div class="progress-labels">
+                  <span>Session Elapsed: <strong id="hero-elapsed-time">33m</strong></span>
+                  <span>Remaining: <strong id="hero-remaining-time">42m</strong></span>
+                </div>
+                <div class="progress-track" role="progressbar" aria-valuenow="44" aria-valuemin="0" aria-valuemax="100" id="hero-progress-bar">
+                  <div class="progress-fill" style="width: 44%;"></div>
+                </div>
+              </div>
+
+              <div class="hero-actions-row" id="hero-actions-row">
+                <button class="btn btn-danger" id="hero-end-session-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2"/>
+                  </svg>
+                  <span>End Session</span>
+                </button>
+                <button class="btn btn-secondary" id="hero-open-unlock-modal-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                  </svg>
+                  <span>Grant Temporary Unlock</span>
+                </button>
+                <button class="btn btn-outline" id="hero-ping-all-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                  </svg>
+                  <span>Send Focus Reminder</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="hero-card-right">
+              <div class="policy-card">
+                <div class="policy-header">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  <span>Enforced Policy Preset</span>
+                </div>
+                <div class="policy-name">Exam & Lab Strict</div>
+                <ul class="policy-list">
+                  <li><span class="bullet-check">✓</span> Social & gaming apps locked</li>
+                  <li><span class="bullet-check">✓</span> Notifications silenced & hidden</li>
+                  <li><span class="bullet-check">✓</span> Approved school portals accessible</li>
+                  <li><span class="bullet-check">✓</span> Emergency 911 calls always available</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Metrics Grid -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-icon-wrap bg-teal-subtle">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+              <div class="metric-content">
+                <div class="metric-label">Focused Devices</div>
+                <div class="metric-value-row">
+                  <span class="metric-value" id="metric-focused-count">24</span>
+                  <span class="metric-sub">of 28 enrolled</span>
+                </div>
+                <div class="metric-badge metric-badge-positive" id="metric-focus-rate">85.7% Focus Compliance</div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-wrap bg-amber-subtle">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="metric-content">
+                <div class="metric-label">Temporary Access</div>
+                <div class="metric-value-row">
+                  <span class="metric-value" id="metric-temp-count">2</span>
+                  <span class="metric-sub">students active</span>
+                </div>
+                <div class="metric-badge metric-badge-warning">Countdowns running</div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-wrap bg-slate-subtle">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m1 1 22 22"/>
+                  <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+                  <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+                  <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+                  <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+                </svg>
+              </div>
+              <div class="metric-content">
+                <div class="metric-label">Offline / Disconnected</div>
+                <div class="metric-value-row">
+                  <span class="metric-value" id="metric-offline-count">2</span>
+                  <span class="metric-sub">devices</span>
+                </div>
+                <div class="metric-badge metric-badge-neutral">Out of range or off</div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-wrap bg-navy-subtle">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1e293b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                  <line x1="16" x2="16" y1="2" y2="6"/>
+                  <line x1="8" x2="8" y1="2" y2="6"/>
+                  <line x1="3" x2="21" y1="10" y2="10"/>
+                </svg>
+              </div>
+              <div class="metric-content">
+                <div class="metric-label">Today's Sessions</div>
+                <div class="metric-value-row">
+                  <span class="metric-value">4</span>
+                  <span class="metric-sub">scheduled</span>
+                </div>
+                <div class="metric-badge metric-badge-info">Next: 11:30 AM</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Split Two-Column Section: Active Unlocks & Quick Device Health -->
+          <div class="overview-dual-grid">
+            <!-- Active Temporary Unlocks List -->
+            <div class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3 class="panel-card-title">Live Temporary Unlocks</h3>
+                  <p class="panel-card-subtitle">Active one-time temporary exemptions with auto-expiration</p>
+                </div>
+                <button class="btn btn-sm btn-secondary" id="overview-grant-temp-btn">+ New Unlock</button>
+              </div>
+              <div class="panel-card-body" id="overview-active-unlocks-container">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+
+            <!-- Focus Health & Classroom Snapshot -->
+            <div class="panel-card">
+              <div class="panel-card-header">
+                <div>
+                  <h3 class="panel-card-title">Classroom Stream</h3>
+                  <p class="panel-card-subtitle">Recent automated focus events and sync logs</p>
+                </div>
+                <span class="pill-soft">Live Feed</span>
+              </div>
+              <div class="panel-card-body">
+                <div class="activity-feed" id="overview-activity-feed">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SCREEN 2: LIVE SESSION ==================== -->
+        <section class="view-panel" id="view-live" aria-labelledby="live-heading">
+          <h2 id="live-heading" class="sr-only">Live Classroom Focus Session</h2>
+
+          <!-- Live Session Header Toolbar -->
+          <div class="session-live-toolbar">
+            <div class="live-toolbar-left">
+              <div class="live-badge-block">
+                <span class="pulse-dot pulse-large"></span>
+                <span class="live-status-label" id="live-session-status-label">Session In Progress</span>
+              </div>
+              <div class="live-timer-chip" id="live-session-countdown-chip">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span id="live-timer-text">41:20 remaining</span>
+              </div>
+            </div>
+
+            <div class="live-toolbar-right">
+              <div class="search-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                </svg>
+                <input type="search" id="live-filter-input" placeholder="Search student or device..." aria-label="Search student or device in live session">
+              </div>
+
+              <div class="live-filter-pills" role="radiogroup" aria-label="Filter by device state">
+                <button class="filter-pill active" data-live-filter="all">All (28)</button>
+                <button class="filter-pill" data-live-filter="focused">Focused (24)</button>
+                <button class="filter-pill" data-live-filter="unlocked">Unlocked (2)</button>
+                <button class="filter-pill" data-live-filter="offline">Offline (2)</button>
+              </div>
+
+              <button class="btn btn-secondary" id="live-grant-unlock-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                </svg>
+                <span>Approve Unlock</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Pending Requests Banner (if any) -->
+          <div class="pending-requests-card" id="pending-requests-banner">
+            <div class="pending-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+            <div class="pending-content">
+              <strong>Pending Student Request:</strong>
+              <span id="pending-request-text">Sophia Rodriguez requested temporary calculator access (10 mins).</span>
+            </div>
+            <div class="pending-actions">
+              <button class="btn btn-sm btn-primary" id="pending-approve-btn">Approve 10m</button>
+              <button class="btn btn-sm btn-outline" id="pending-deny-btn">Decline</button>
+            </div>
+          </div>
+
+          <!-- Student Devices Live Grid -->
+          <div class="devices-grid" id="live-devices-grid">
+            <!-- Rendered by JS -->
+          </div>
+        </section>
+
+        <!-- ==================== SCREEN 3: SCHEDULE ==================== -->
+        <section class="view-panel" id="view-schedule" aria-labelledby="schedule-heading">
+          <h2 id="schedule-heading" class="sr-only">Focus Session Schedule</h2>
+
+          <div class="schedule-header-card">
+            <div>
+              <h3 class="schedule-header-title">Weekly Classroom Focus Schedule</h3>
+              <p class="schedule-header-subtitle">Configured session schedules and automated focus policy triggers</p>
+            </div>
+            <div class="schedule-day-tabs" role="tablist">
+              <button class="day-tab active" data-day="today">Today (Wednesday)</button>
+              <button class="day-tab" data-day="tomorrow">Tomorrow (Thursday)</button>
+              <button class="day-tab" data-day="friday">Friday</button>
+            </div>
+          </div>
+
+          <div class="schedule-timeline" id="schedule-timeline-container">
+            <!-- Rendered by JS -->
+          </div>
+        </section>
+
+        <!-- ==================== SCREEN 4: DEVICES ==================== -->
+        <section class="view-panel" id="view-devices" aria-labelledby="devices-heading">
+          <h2 id="devices-heading" class="sr-only">Enrolled Student Devices</h2>
+
+          <!-- Device List Header Controls -->
+          <div class="devices-table-controls">
+            <div class="devices-search-group">
+              <div class="search-box wide">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                </svg>
+                <input type="search" id="devices-search-input" placeholder="Search by student name, device model, or asset ID..." aria-label="Search all enrolled devices">
+              </div>
+            </div>
+
+            <div class="devices-filter-group">
+              <div class="filter-tabs" role="tablist" id="devices-status-filter-tabs">
+                <button class="filter-tab active" data-status="all">All (<span id="count-all">28</span>)</button>
+                <button class="filter-tab" data-status="focused">Focused (<span id="count-focused">24</span>)</button>
+                <button class="filter-tab" data-status="unlocked">Unlocked (<span id="count-unlocked">2</span>)</button>
+                <button class="filter-tab" data-status="offline">Offline (<span id="count-offline">2</span>)</button>
+              </div>
+
+              <button class="btn btn-secondary" id="devices-quick-unlock-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                </svg>
+                <span>Grant Temporary Access</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Devices Table Container -->
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="devices-table" id="devices-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Student</th>
+                    <th scope="col">Device Model</th>
+                    <th scope="col">Asset Tag</th>
+                    <th scope="col">Battery</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Access Timer</th>
+                    <th scope="col" class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="devices-table-body">
+                  <!-- Rendered by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Empty Search State -->
+            <div class="empty-state" id="devices-empty-state" hidden>
+              <div class="empty-icon-wrap">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                </svg>
+              </div>
+              <h3 class="empty-title">No Matching Devices Found</h3>
+              <p class="empty-desc">We couldn't find any student devices matching your search query. Try checking for typos or clear filters.</p>
+              <button class="btn btn-outline" id="clear-device-search-btn">Clear Search & Filters</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 1: START/END SESSION CONFIRMATION ==================== -->
+  <dialog class="modal-dialog" id="session-dialog" closedby="any" aria-labelledby="session-dialog-title" aria-describedby="session-dialog-desc">
+    <div class="modal-header">
+      <div class="modal-header-icon" id="session-dialog-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="18" height="18" x="3" y="3" rx="2"/>
+        </svg>
+      </div>
+      <div>
+        <h3 class="modal-title" id="session-dialog-title">End Classroom Session?</h3>
+        <p class="modal-subtitle" id="session-dialog-subtitle">ClassMode Demo Protocol</p>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p id="session-dialog-desc">Are you sure you want to end the focus session for <strong>Grade 10 — AP Biology</strong>? All 28 student devices will be restored to their standard profile immediately.</p>
+      <div class="dialog-notice">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <span>Demo Mode: Simulates an MDM push notification release to all enrolled student devices.</span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <form method="dialog">
+        <button class="btn btn-outline" value="cancel" type="submit">Cancel</button>
+      </form>
+      <button class="btn btn-danger" id="session-dialog-confirm-btn">Confirm End Session</button>
+    </div>
+  </dialog>
+
+  <!-- ==================== MODAL 2: APPROVE TEMPORARY UNLOCK ==================== -->
+  <dialog class="modal-dialog" id="unlock-dialog" closedby="any" aria-labelledby="unlock-dialog-title" aria-describedby="unlock-dialog-desc">
+    <div class="modal-header">
+      <div class="modal-header-icon bg-amber-subtle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+        </svg>
+      </div>
+      <div>
+        <h3 class="modal-title" id="unlock-dialog-title">Approve Temporary Access</h3>
+        <p class="modal-subtitle">One-time timed device exemption</p>
+      </div>
+    </div>
+    <form id="unlock-form" method="dialog">
+      <div class="modal-body">
+        <p id="unlock-dialog-desc">Grant a student temporary phone access. A real-time countdown will begin immediately, and focus will re-engage when time expires.</p>
+
+        <div class="form-group">
+          <label for="unlock-student-select" class="form-label">Select Student Device</label>
+          <select id="unlock-student-select" class="form-select" required>
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Temporary Unlock Duration</label>
+          <div class="duration-selector" role="radiogroup" aria-label="Duration in minutes">
+            <label class="duration-option">
+              <input type="radio" name="unlock-duration" value="5" checked>
+              <div class="duration-box">
+                <span class="duration-num">5</span>
+                <span class="duration-unit">Minutes</span>
+              </div>
+            </label>
+            <label class="duration-option">
+              <input type="radio" name="unlock-duration" value="10">
+              <div class="duration-box">
+                <span class="duration-num">10</span>
+                <span class="duration-unit">Minutes</span>
+              </div>
+            </label>
+            <label class="duration-option">
+              <input type="radio" name="unlock-duration" value="15">
+              <div class="duration-box">
+                <span class="duration-num">15</span>
+                <span class="duration-unit">Minutes</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="unlock-reason-select" class="form-label">Reason for Exemption</label>
+          <select id="unlock-reason-select" class="form-select">
+            <option value="Scientific Calculator App">Digital Calculator / Graphing</option>
+            <option value="School Portal Login">School Portal 2FA Verification</option>
+            <option value="Medical Monitoring">Medical Glucose / Health Monitor</option>
+            <option value="Class Presentation">Presentation Remote / Notes</option>
+            <option value="Teacher Discretion">Teacher Special Discretion</option>
+          </select>
+        </div>
+
+        <div class="dialog-notice">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <span>Privacy Notice: Temporary access does not monitor phone content, private chats, or history.</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" value="cancel" type="button" id="unlock-cancel-btn">Cancel</button>
+        <button class="btn btn-secondary" type="submit" id="unlock-submit-btn">Grant Timed Access</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ==================== TOAST NOTIFICATIONS CONTAINER ==================== -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Loading Simulation Overlay -->
+  <div class="loading-overlay" id="loading-overlay" hidden aria-hidden="true">
+    <div class="loading-spinner-wrap">
+      <div class="spinner"></div>
+      <span class="loading-text">Synchronizing classroom roster & policies...</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
